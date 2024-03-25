@@ -67,7 +67,7 @@ public class CollisionWorld
 
                 if (SATCheck(colliders[i], colliders[j], out collisionNormal, out collisionDepth))
                 {
-                    collisions.Add(new Collision(colliders[i], colliders[j], collisionNormal, collisionDepth));
+                    collisions.Add(new Collision(colliders[i], colliders[j], Vector3.Normalize(collisionNormal), collisionDepth));
                 }
             }
         }

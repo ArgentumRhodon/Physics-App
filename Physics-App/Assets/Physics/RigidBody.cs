@@ -5,8 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(OrientedBoundingBox))]
 public class RigidBody : MonoBehaviour
 {
+
     public OrientedBoundingBox Collider { get; private set; }
 
+    public float restitution = 1.0f;
     public float mass = 5.0f;
     public float drag = 0.0f;
 
@@ -82,7 +84,7 @@ public class RigidBody : MonoBehaviour
         angularMomentum *= multiplierA;
     }
 
-    private void AddTorque(Vector3 torque, ForceMode forceMode = ForceMode.Force)
+    public void AddTorque(Vector3 torque, ForceMode forceMode = ForceMode.Force)
     {
 
         switch(forceMode)
@@ -103,7 +105,7 @@ public class RigidBody : MonoBehaviour
         }
     }
 
-    private void AddForce(Vector3 force, ForceMode forceMode = ForceMode.Force)
+    public void AddForce(Vector3 force, ForceMode forceMode = ForceMode.Force)
     {
         switch (forceMode)
         {
