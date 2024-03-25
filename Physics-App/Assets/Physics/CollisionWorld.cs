@@ -72,8 +72,6 @@ public class CollisionWorld
             }
         }
 
-        Debug.Log(collisions.Count);
-
         // Simulate resolving collisions
         for(int i = 0; i < collisions.Count; i++)
         {

@@ -86,7 +86,6 @@ public class RigidBody : MonoBehaviour
 
     public void AddTorque(Vector3 torque, ForceMode forceMode = ForceMode.Force)
     {
-
         switch(forceMode)
         {
             case ForceMode.Force:
