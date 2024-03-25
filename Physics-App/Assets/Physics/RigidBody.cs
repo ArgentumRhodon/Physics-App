@@ -19,7 +19,7 @@ public class RigidBody : MonoBehaviour
 
     public float angularDrag = 0.0f;
     public Vector3 inertiaTensor = new Vector3(1, 1, 1);
-    private Vector3 angularMomentum = Vector3.zero;
+    public Vector3 AngularMomentum { get; private set; }
     private Vector3 torque = Vector3.zero;
 
     public bool useGravity = false;
@@ -53,11 +53,11 @@ public class RigidBody : MonoBehaviour
     private void RotateResolve()
     {
         // Explicit Euler numerical solution for rotation
-        angularMomentum += torque * Time.fixedDeltaTime;
+        AngularMomentum += torque * Time.fixedDeltaTime;
         Quaternion halfAngularVelocityQuaternionWithTime = new Quaternion(
-            (0.5f * Time.fixedDeltaTime) * angularMomentum.x / inertiaTensor.x,
-            (0.5f * Time.fixedDeltaTime) * angularMomentum.y / inertiaTensor.y,
-            (0.5f * Time.fixedDeltaTime) * angularMomentum.z / inertiaTensor.z,
+            (0.5f * Time.fixedDeltaTime) * AngularMomentum.x / inertiaTensor.x,
+            (0.5f * Time.fixedDeltaTime) * AngularMomentum.y / inertiaTensor.y,
+            (0.5f * Time.fixedDeltaTime) * AngularMomentum.z / inertiaTensor.z,
             1
         );
         transform.rotation = halfAngularVelocityQuaternionWithTime * transform.rotation;
@@ -81,7 +81,7 @@ public class RigidBody : MonoBehaviour
         // Opposing angular drag force - Unity Style - https://discussions.unity.com/t/how-is-drag-applied-to-force/15542
         float multiplierA = 1.0f - angularDrag * Time.fixedDeltaTime;
         if (multiplierA < 0.0f) multiplierA = 0.0f;
-        angularMomentum *= multiplierA;
+        AngularMomentum *= multiplierA;
     }
 
     public void AddTorque(Vector3 torque, ForceMode forceMode = ForceMode.Force)
@@ -93,10 +93,10 @@ public class RigidBody : MonoBehaviour
                 break;
             case ForceMode.Impulse: // The torque represents an immediate change in angular momentum considering mass
                 torque *= 10;
-                angularMomentum += torque / mass;
+                AngularMomentum += torque / mass;
                 break;
             case ForceMode.VelocityChange: // The torque represents a direct momentum change
-                angularMomentum += torque;
+                AngularMomentum += torque;
                 break;
             default:
                 Debug.LogError(forceMode + " force mode not implemented");
