@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using UnityEditor;
 #endif
 
-[RequireComponent(typeof(RigidBody))]
 public class OrientedBoundingBox : MonoBehaviour
 {
     public RigidBody RigidBody { get; private set; }
