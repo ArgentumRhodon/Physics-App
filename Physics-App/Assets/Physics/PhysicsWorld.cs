@@ -32,31 +32,6 @@ public class PhysicsWorld : MonoBehaviour
         ResolveCollisions();
     }
 
-    public GameObject pauseButton;
-    public void ToggleTime()
-    {
-        if (Time.timeScale > 0) Time.timeScale = 0;
-        else Time.timeScale = 1;
-
-        pauseButton.GetComponent<TextMeshPro>().text = Time.timeScale == 0 ? "Start" : "Pause";
-    }
-
-    public void Reset()
-    {
-        SceneManager.LoadScene("SampleScene");
-    }
-
-    public void GoCrazy()
-    {
-        float intensity = 50.0f;
-        Random random = new Random();
-        foreach(RigidBody rigidBody in rigidBodies)
-        {
-            rigidBody.AddForce(new Vector3(random.Next(-1, 1), random.Next(-1, 1), random.Next(-1, 1)) * intensity, ForceMode.Impulse);
-            rigidBody.AddTorque(new Vector3(random.Next(-1, 1), random.Next(-1, 1), random.Next(-1, 1)) * intensity / 10, ForceMode.Impulse);
-        }
-    }
-
     public void Quit()
     {
         Application.Quit();
@@ -64,7 +39,6 @@ public class PhysicsWorld : MonoBehaviour
 
     private void ResolveCollisions()
     {
-        
         for (int i = 0; i < CollisionWorld.Instance.collisions.Count; i++)
         {
             // Only handles translation responses
