@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEditor.IMGUI.Controls;
-using UnityEditor.EditorTools;
 using System.Collections.Generic;
 
 
 #if UNITY_EDITOR
+using UnityEditor.IMGUI.Controls;
+using UnityEditor.EditorTools;
 using UnityEditor;
 #endif
 
